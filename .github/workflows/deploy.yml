@@ -1,4 +1,4 @@
-name: test Kustomize Configurations
+name: Test Kustomize Configurations
 on:
   push:
     branches: [ main]
