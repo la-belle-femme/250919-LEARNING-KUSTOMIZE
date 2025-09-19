@@ -1,7 +1,7 @@
 name: Test Kustomize Configurations
 on:
   push:
-    branches: [ main]
+    branches: [ master]
 
 jobs:
   validate:
