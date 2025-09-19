@@ -1,13 +1,34 @@
-name: Test Kustomize Configurations
+# name: Test Kustomize Configurations
+# on:
+#   push:
+#     branches: [ main]
+
+# jobs:
+#   validate:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Get the code
+#         uses: actions/checkout@v4
+
+#       - name: Install Kustomize
+#         run: |
+#           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+#           sudo mv kustomize /usr/local/bin
+
+#       - name: Test base Configuration   
+#         run: |
+#           kubectl kustomize ./base
+  
+name: Validate Kustomize Configurations  
 on:
   push:
     branches: [ main]
 
 jobs:
-  validate:
+  validate-all-environments:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Install Kustomize
@@ -15,8 +36,26 @@ jobs:
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
           sudo mv kustomize /usr/local/bin
 
-      - name: Test base Configuration   
+      - name: Validate base configuration   
         run: |
-          kubectl kustomize ./base
-  
-  
+          echo "Testing base configuration..."
+          kubectl kustomize base/ > /dev/null
+          echo "✅ Base is valid"
+      
+      - name: Validate dev environment configuration   
+        run: |
+          echo "Testing dev environment configuration..."
+          kubectl kustomize overlays/dev/ > /dev/null
+          echo "✅ Dev environment is valid"
+      
+      - name: Validate staging environment configuration   
+        run: |
+          echo "Testing staging environment configuration..."
+          kubectl kustomize overlays/staging/ > /dev/null
+          echo "✅ Staging environment is valid"  
+
+      - name: Validate prod environment configuration   
+        run: |
+          echo "Testing prod environment configuration..."
+          kubectl kustomize overlays/prod/ > /dev/null
+          echo "✅ Prod environment is valid"           
