@@ -111,9 +111,9 @@ jobs:
           echo "Original dev kustomization:"
           cat kustomization.yaml
           echo "Updating dev environment..."
-          kubectl kustomize edit set image webapp=nginx:1.22-dev-${{ github.sha }}
-          kubectl kustomize edit add label build-id:${{ github.run_id }}
-          kubectl kustomize edit add label git-commit:${{ github.sha }}
+          kustomize edit set image webapp=nginx:1.22-dev-${{ github.sha }}
+          kustomize edit add label build-id:${{ github.run_id }}
+          kustomize edit add label git-commit:${{ github.sha }}
           echo "Update dev kustomization:"
           cat kustomization.yaml
 
