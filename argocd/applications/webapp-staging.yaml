@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webapp-staging
+  namespace: argocd
+spec:
+  destination:
+    namespace: webapp-staging
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    repoURL: https://github.com/la-belle-femme/250919-LEARNING-KUSTOMIZE
+    targetRevision: main
+    path: overlays/staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
