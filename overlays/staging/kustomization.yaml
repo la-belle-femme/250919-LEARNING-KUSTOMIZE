@@ -21,3 +21,4 @@ configMapGenerator:
   - database_url=postgres://staging-db:5432/webapp_staging
   - log_level=WARN
   - cache_ttl=600
+  - feature_flag=enabled
