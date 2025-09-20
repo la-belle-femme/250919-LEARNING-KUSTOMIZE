@@ -9,3 +9,4 @@ labels:
     pairs:
       environment: development
       version: latest
+      test-gitops: "12345"
