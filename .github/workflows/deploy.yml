@@ -102,15 +102,15 @@ jobs:
           echo "✅ Prod environment is valid"           
 
       - name: Update dev environment with build info
+        working-directory: overlays/dev/
         run: |
-          echo "Current working directory: $(pwd)"
-          echo "Files in overlays/dev:"
-          ls -la overlays/dev/
-          echo "Original dev kustomization:"
-          cat overlays/dev/kustomization.yaml
-          echo "Updating dev environment..."
-          cd overlays/dev/
+          echo "Current  directory after working-directory:"
           pwd
+          echo "Files in current directory:"
+          ls -la 
+          echo "Original dev kustomization:"
+          cat kustomization.yaml
+          echo "Updating dev environment..."
           kubectl kustomize edit set image webapp=nginx:1.22-dev-${{ github.sha }}
           kubectl kustomize edit add label build-id:${{ github.run_id }}
           kubectl kustomize edit add label git-commit:${{ github.sha }}
