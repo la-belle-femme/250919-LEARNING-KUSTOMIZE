@@ -103,10 +103,14 @@ jobs:
 
       - name: Update dev environment with build info
         run: |
-          cd overlays/dev/
+          echo "Current working directory: $(pwd)"
+          echo "Files in overlays/dev:"
+          ls -la overlays/dev/
           echo "Original dev kustomization:"
-          cat kustomization.yaml
+          cat overlays/dev/kustomization.yaml
           echo "Updating dev environment..."
+          cd overlays/dev/
+          pwd
           kubectl kustomize edit set image webapp=nginx:1.22-dev-${{ github.sha }}
           kubectl kustomize edit add label build-id:${{ github.run_id }}
           kubectl kustomize edit add label git-commit:${{ github.sha }}
