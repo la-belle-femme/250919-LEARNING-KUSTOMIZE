@@ -83,21 +83,21 @@ jobs:
           kubectl kustomize base/ > /dev/null
           echo "✅ Base is valid"
       
-      - name: Validate dev environment configuration   
+      - name: Validate dev environment    
         run: |
-          echo "Testing dev environment configuration..."
+          echo "Testing dev environment ..."
           kubectl kustomize overlays/dev/ > /dev/null
           echo "✅ Dev environment is valid"
       
-      - name: Validate staging environment configuration   
+      - name: Validate staging environment    
         run: |
-          echo "Testing staging environment configuration..."
+          echo "Testing staging environment ..."
           kubectl kustomize overlays/staging/ > /dev/null
           echo "✅ Staging environment is valid"  
 
-      - name: Validate prod environment configuration   
+      - name: Validate prod environment 
         run: |
-          echo "Testing prod environment configuration..."
+          echo "Testing production environment ..."
           kubectl kustomize overlays/prod/ > /dev/null
           echo "✅ Prod environment is valid"           
 
